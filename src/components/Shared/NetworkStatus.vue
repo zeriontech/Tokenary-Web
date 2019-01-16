@@ -1,5 +1,5 @@
 <template>
-  <div class="network-status bg-danger" v-if="OfflineOnly">
+  <div class="network-status bg-danger" v-if="isOffline">
     <div class="container text-center">
         You are Offline
     </div>
