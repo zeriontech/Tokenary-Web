@@ -1,0 +1,5 @@
+export const ACCOUNT_RESET = 'resetAccount'
+export const ACCOUNT_UPDATE_TYPE = 'updateAccountType'
+export const ACCOUNT_UPDATE_ADDRESS = 'updateAccountAddress'
+export const ACCOUNT_UPDATE_CURRENCY = 'updateAccountCurrency'
+export const ACCOUNT_UPDATE_LANGUAGE = 'updateAccountLanguage'

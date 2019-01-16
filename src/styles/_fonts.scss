@@ -1,0 +1,101 @@
+$font-size: 1.5rem;
+$line-height: 1.6;
+
+$font-light: 300;
+$font-regular: 400;
+$font-medium: 500;
+$font-semi: 600;
+$font-bold: 700;
+$font-extra: 800;
+
+$sf_src: '../assets/fonts/SanFranciscoFont';
+
+@font-face {
+  font-family: 'SF';
+  src: url('#{$sf_src}/sanfranciscotext-regular-webfont.eot');
+  src: url('#{$sf_src}/sanfranciscotext-regular-webfont.eot?#iefix') format('embedded-opentype'),
+  url('#{$sf_src}/sanfranciscotext-regular-webfont.woff') format('woff'),
+  url('#{$sf_src}/sanfranciscotext-regular-webfont.ttf') format('truetype');
+  font-style: normal;
+  font-weight: $font-regular;
+}
+@font-face {
+  font-family: 'SF';
+  src: url('#{$sf_src}/sanfranciscotext-light-webfont.eot');
+  src: url('#{$sf_src}/sanfranciscotext-light-webfont.eot?#iefix') format('embedded-opentype'),
+  url('#{$sf_src}/sanfranciscotext-light-webfont.woff') format('woff'),
+  url('#{$sf_src}/sanfranciscotext-light-webfont.ttf') format('truetype');
+  font-style: normal;
+  font-weight: $font-light;
+}
+@font-face {
+  font-family: 'SF';
+  src: url('#{$sf_src}/sanfranciscotext-bold-webfont.eot');
+  src: url('#{$sf_src}/sanfranciscotext-bold-webfont.eot?#iefix') format('embedded-opentype'),
+  url('#{$sf_src}/sanfranciscotext-bold-webfont.woff') format('woff'),
+  url('#{$sf_src}/sanfranciscotext-bold-webfont.ttf') format('truetype');
+  font-style: normal;
+  font-weight: $font-bold;
+}
+
+@font-face {
+  font-family: 'Product Sans';
+  font-style: normal;
+  font-weight: $font-regular;
+  src: local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Product Sans", sans-serif;
+  font-weight: $font-regular;
+  line-height: $line-height;
+  font-size: $font-size;
+  color: black;
+}
+h1, h2, h3, h4 {
+  font-weight: $font-light !important;
+  margin: 0;
+  strong {
+    font-weight:$font-bold !important;
+  }
+}
+h5, h6 {
+  font-weight:$font-bold;
+}
+
+h1 {
+  font-size:3rem;
+  margin-bottom: 20px;
+  font-weight: $font-regular;
+  color: black;
+}
+
+p {
+  margin: 0 0 10px;
+  font-weight:$font-regular;
+  font-size:$font-size;
+  line-height: 2.4rem;
+  color: black;
+  a {
+    color: blue;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+      color: lighten(black, 20%);
+    }
+  }
+}
+
+ul, ol {
+  font-size: $font-size;
+  padding-left: 1.5rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: .75rem;
+}

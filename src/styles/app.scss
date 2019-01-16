@@ -1,0 +1,206 @@
+@import "~bootstrap/scss/bootstrap";
+@import "fonts";
+
+
+
+html, body, #app {
+  height: 100%;
+  background: white;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.error {
+  color: red
+}
+
+.form-control {
+  outline: none;
+  &:focus {
+    box-shadow: none;
+    border-color: #ced4da;
+  }
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+/* Modals */
+.v--modal-overlay {
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.v--modal {
+  background: white;
+  padding: 25px 0;
+  border-radius: 12px;
+}
+
+.modal-content {
+  border: none;
+  background: none;
+  .form-control {
+    padding: .75rem .75rem;
+  }
+}
+
+.modal-header .close {
+  outline: none;
+  font-size:2rem;
+}
+
+.modal-header, .modal-footer {
+  border: none;
+}
+
+.modal-title {
+  font-size:1.8rem;
+}
+
+.modal-footer {
+  button {
+    width: 100%;
+    height: 40px;
+    font-size: 1.4rem;
+  }
+}
+/* Modals end */
+
+
+/*Spinner*/
+.v-spinner {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0px;
+}
+/*Spinner end*/
+
+/** Buttons **/
+
+.btn {
+  border-radius: 8px;
+  transition: box-shadow .3s;
+}
+
+.btn-simple {
+  background-color: white;
+  border-color: $tokenary;
+  color: black;
+  transition: color .3s;
+  &:hover {
+    background-color: darken($tokenary, 5%);
+    border-color: darken($tokenary, 5%);
+    color: white;
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+  }
+  &:active {
+    background-color: $tokenary;
+    color: white;
+    border-color: $tokenary;
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+  }
+}
+
+.btn-tokenary {
+  background-color: $tokenary;
+  border-color: $tokenary;
+  color: white;
+  &:hover {
+    background-color: darken($tokenary, 10%);
+    border-color: darken($tokenary, 10%);
+    color: white;
+    box-shadow: 0 1px 1px 0 rgba(66,133,244,0.45), 0 1px 3px 1px rgba(66,133,244,0.3)
+
+  }
+  &:active {
+    background-color: white;
+    color: $tokenary;
+    border-color: $tokenary;
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+  }
+}
+
+.btn-metamask {
+  background-color: $metamask;
+  border-color: $metamask;
+  color: white;
+  &:hover {
+    background-color: darken($metamask, 5%);
+    border-color: darken($metamask, 5%);
+    color: white;
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+  }
+  &:active {
+    background-color: white;
+    color: $metamask;
+    border-color: $metamask;
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+  }
+}
+
+.btn-walletconnect {
+  background-color: $walletconnect;
+  border-color: $walletconnect;
+  color: white;
+  &:hover {
+    background-color: darken($walletconnect, 5%);
+    border-color: darken($walletconnect, 5%);
+    color: white;
+  }
+  &:active {
+    background-color: white;
+    color: $walletconnect;
+    border-color: $walletconnect;
+  }
+}
+
+/*Buttons end*/
+
+/* Cards */
+
+.card {
+  border: 1px solid #DCDCDC;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+/* Cards end */
+
+/* Icons */
+
+.icon-wrapper {
+
+  svg {
+    stroke: $iconGrey;
+  }
+
+  border-radius: 50%;
+
+  &:hover {
+    background-color: $iconLightGrey;
+
+    svg {
+      stroke: black;
+    }
+  }
+  &:active {
+    background-color: $iconLightBlue;
+    svg {
+      stroke: $iconBlue;
+    }
+  }
+}
+
+/* End Icons */

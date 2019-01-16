@@ -1,0 +1,14 @@
+{
+  "metamask": {
+    "type": "METAMASK"
+  },
+  "ledger": {
+    "type": "LEDGER"
+  },
+  "wallet_connect": {
+    "type": "WALLETCONNECT"
+  },
+  "watch_address": {
+    "type": "WATCH"
+  }
+}
