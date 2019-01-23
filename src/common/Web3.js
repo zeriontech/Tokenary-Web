@@ -16,6 +16,7 @@ export const createSignableTransaction = (transaction) =>
     if (transaction.contractAddress) {
       transaction = getTransferTokenTransaction(transaction)
     }
+
     const _value = transaction.value ? toWei(transaction.value) : '0x00'
     const _data = transaction.data || '0x'
     createTransactionTx({

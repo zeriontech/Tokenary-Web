@@ -5,44 +5,42 @@
             <div class="mt-1 row justify-content-center">
                 <div class="col-md-5">
                     <account-info/>
-                    <wallets-list/>
+                    <collectibles-contracts-list/>
                 </div>
                 <div class="col-md-7">
-                    <not-mined-transaction-list/>
-                    <transactions-list/>
+                    <collectibles-list/>
                 </div>
             </div>
         </div>
     </div>
+
 </template>
 
 <script>
 import MenuLeft from '../Shared/Menu'
-import WalletsList from '../WalletsList'
-import TransactionsList from '../TransactionsList'
-import NotMinedTransactionList from '../NotMinedTransactionList'
+import CollectiblesList from '../CollectiblesList'
+import CollectiblesContractsList from '../CollectiblesContractsList'
 import AccountInfo from '../AccountInfo'
 import { mapActions, mapState } from 'vuex'
 
 export default {
-  name: 'dashboard',
+  name: 'collectibles',
   components: {
     AccountInfo,
-    WalletsList,
-    NotMinedTransactionList,
-    TransactionsList,
-    MenuLeft
-  },
-  computed: {
-    ...mapState({
-      accountAddress: state => state.account.address
-    })
+    CollectiblesList,
+    MenuLeft,
+    CollectiblesContractsList
   },
   methods: {
     ...mapActions([
       'metamaskCheck',
       'fetchRates'
     ])
+  },
+  computed: {
+    ...mapState({
+      accountAddress: state => state.account.address
+    })
   },
   created: function () {
     this.metamaskCheck()

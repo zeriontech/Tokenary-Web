@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Dashboard from '@/components/Pages/Dashboard'
+import Collectibles from '@/components/Pages/Collectibles'
 import Index from '@/components/Pages/Index'
 import Transaction from '@/components/Pages/Transaction'
 import store from '../store'
@@ -50,6 +51,7 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   base: '',
+  linkExactActiveClass: 'active',
   routes: [
     {
       path: '/',
@@ -74,6 +76,12 @@ export default new Router({
           component: Dashboard
         }
       ]
+    },
+    {
+      name: 'collectibles',
+      path: '/:address/collectibles',
+      component: Collectibles,
+      beforeEnter: ifAuthenticated
     }
   ]
 })

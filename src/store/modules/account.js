@@ -184,6 +184,7 @@ const actions = {
     if (state.address !== '') {
       dispatch('fetchTokens')
       dispatch('refreshTransactions')
+      dispatch('fetchCollectibles')
     }
   },
   [ACCOUNT_UPDATE_CURRENCY] ({ rootState, commit, getters, dispatch }, currency) {

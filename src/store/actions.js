@@ -95,6 +95,12 @@ export const actions = {
       resolve()
     })
   },
+  selectContractCollectibles ({ commit, state }, { address }) {
+    return new Promise((resolve) => {
+      commit('SELECT_CONTRACT_COLLECTIBLES', address)
+      resolve()
+    })
+  },
   selectToken ({ commit, state, getters, dispatch }, { address }) {
     let account = state.account.address
 
@@ -141,14 +147,15 @@ export const actions = {
       })
     })
   },
-  getCollectibles ({ commit, state, getters, dispatch }) {
-    dispatch('wait/start', 'load blockhain stats', { root: true })
+  fetchCollectibles ({ commit, state, getters, dispatch }) {
+    let account = state.account.address
+    // dispatch('wait/start', 'load blockhain stats', { root: true })
 
     return new Promise((resolve) => {
-      getCollectibles().then((res) => {
-        console.log(res)
-        // commit('UPDATE_BLOCKHAIN_STATS', res.data.suggested)
-        dispatch('wait/end', 'load blockhain stats', { root: true })
+      getCollectibles(account, getters.getAccountCurrencyName).then((res) => {
+        commit('FETCH_COLLECTIBLES', res.data.collectibles)
+        commit('FETCH_CONTRACT_COLLECTIBLES', res.data.contracts)
+        // dispatch('wait/end', 'load blockhain stats', { root: true })
         resolve()
       })
     })

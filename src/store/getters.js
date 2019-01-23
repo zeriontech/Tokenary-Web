@@ -159,6 +159,16 @@ export const getters = {
       return 0
     })
   },
+  filteredCollectibles: state => {
+    if (state.selectedContractCollectibles === 'ALL') {
+      return state.collectibles
+    }
+    return state.collectibles.filter((item) => {
+      if (item.contract === state.selectedContractCollectibles) {
+        return true
+      }
+    })
+  },
   countLowMarketTokens: state => {
     let count = 0
     state.tokens.forEach((item) => {

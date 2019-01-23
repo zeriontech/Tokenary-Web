@@ -1,6 +1,9 @@
 const initialState = {
   blockChainStats: [],
   tokens: [],
+  collectibles: [],
+  contractCollectibles: [],
+  selectedContractCollectibles: 'ALL',
   customTokens: [],
   transactions: [],
   unacceptedTransactions: [],
@@ -37,6 +40,16 @@ export const mutations = {
   FETCH_CUSTOM_TOKENS (state, customTokens) {
     if (checkAddress(state)) {
       state.customTokens = customTokens
+    }
+  },
+  FETCH_COLLECTIBLES (state, collectibles) {
+    if (checkAddress(state)) {
+      state.collectibles = collectibles
+    }
+  },
+  FETCH_CONTRACT_COLLECTIBLES (state, contractCollectibles) {
+    if (checkAddress(state)) {
+      state.contractCollectibles = contractCollectibles
     }
   },
   FETCH_TOTAL_BALANCE (state, total) {
@@ -84,6 +97,9 @@ export const mutations = {
   },
   SELECT_TOKEN (state, token) {
     state.selectedToken = token
+  },
+  SELECT_CONTRACT_COLLECTIBLES (state, contract) {
+    state.selectedContractCollectibles = contract
   },
   FETCH_RATES (state, rates) {
     state.rates = rates
