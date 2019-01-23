@@ -5,7 +5,7 @@
         <div class="card-body text-center">
             <h5 class="card-title">{{collectible.name}} ({{ collectible.token_id }})</h5>
             <a target="_blank" :href="collectible.permalink" class="btn btn-primary">Go somewhere</a>
-            <!--<a @click="send()">Gift</a>-->
+            <!--<a @click="gift()">Gift</a>-->
         </div>
     </div>
 </template>
@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     ...mapActions(['sendTransaction']),
-    send () {
+    gift () {
       this.sendTransaction(
         {
           from: this.accountAddress,
@@ -52,4 +52,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .card-img-top {
+        border-top-left-radius: calc(1rem);
+        border-top-right-radius: calc(1rem);
+    }
 </style>
