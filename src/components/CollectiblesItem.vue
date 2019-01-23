@@ -1,51 +1,50 @@
 <template>
-    <div class="card" style="width: 18rem;">
+    <div class="card" style="width: 20rem;">
         <img :style="{ backgroundColor: '#'+collectible.background_color }"
              class="card-img-top" :src="collectible.image_preview_url" alt="Card image cap">
         <div class="card-body text-center">
             <h5 class="card-title">{{collectible.name}} ({{ collectible.token_id }})</h5>
-            <a target="_blank" :href="collectible.permalink" class="btn btn-primary">Go somewhere</a>
-            <!--<a @click="gift()">Gift</a>-->
+            <a target="_blank" :href="collectible.permalink" class="btn btn-block btn-info btn-lg">Go somewhere</a>
+            <button :disabled="!couldExecuteTransaction" @click="gift()" class="btn btn-block btn-tokenary btn-lg">Send a gift</button>
         </div>
     </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import mixins from '../mixins.js'
 import Blockie from './Blockie'
+import SendCollectibleForm from './SendTransactionForm/SendCollectibleForm'
 
 export default {
   name: 'collectibles-item',
   components: {
-    Blockie
+    Blockie,
+    SendCollectibleForm
   },
   props: ['collectible'],
   mixins: [mixins],
   computed: {
     ...mapState({
-      blockChainStats: state => state.blockChainStats,
-      accountAddress: state => state.account.address
-    })
+      blockChainStats: state => state.blockChainStats
+    }),
+    ...mapGetters([
+      'getNftVersionByToken',
+      'couldExecuteTransaction'
+    ])
   },
   methods: {
-    ...mapActions(['sendTransaction']),
     gift () {
-      this.sendTransaction(
-        {
-          from: this.accountAddress,
-          to: '0x0aD9Fb61a07BAC25625382B63693644497f1B204',
-          gasPrice: this.blockChainStats.fast,
-          value: this.collectible.token_id,
-          contractAddress: this.collectible.contract,
-          decimals: 0,
-          gasLimit: 54379
-        }
-      ).then(() => {
+      this.$modal.show(SendCollectibleForm, {
+        collectible: this.collectible,
+        gasStart: this.fromWei(this.blockChainStats.fast, 'gwei'),
+        nftVersion: this.getNftVersionByToken(this.collectible.contract)
+      },
+      {
+        adaptive: true,
+        height: 'auto'
       })
-        .catch(e => {
-          console.log(e)
-        })
+      this.$store.dispatch('updateCurrentTransactionHash', { hash: null })
     }
   }
 }

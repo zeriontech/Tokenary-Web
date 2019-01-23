@@ -1,4 +1,4 @@
-import { BigNumber } from 'bignumber.js'
+import {BigNumber} from 'bignumber.js'
 import mixins from '../mixins.js'
 import moment from 'moment'
 import utils from 'web3-utils'
@@ -168,6 +168,11 @@ export const getters = {
         return true
       }
     })
+  },
+  getNftVersionByToken: state => contract => {
+    return state.contractCollectibles.find((item) => {
+      return item.address === contract
+    }).nft_version
   },
   countLowMarketTokens: state => {
     let count = 0

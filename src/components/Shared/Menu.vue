@@ -1,5 +1,5 @@
 <template>
-    <nav class="fixed-left col-md-2">
+    <nav class=" card fixed-left col-md-1">
         <nav class="nav nav-pills flex-column">
             <router-link class="nav-link" :to="{name: 'dashboard', params: { address: accountAddress }}">
                 Dashboard
@@ -30,15 +30,23 @@ export default {
     }
 
     .fixed-left {
+        padding-left: 0;
         bottom: 0;
         /*width: 232px;*/
         flex-flow: column nowrap;
         align-items: flex-start;
     }
 
+    .nav-pills .nav-link {
+        border-radius: 0;
+    }
+
     .fixed-left {
+        border-radius: 0;
+        border-top: 0;
+        border-bottom: 0;
         position: fixed;
-        top: 100px;
+        top: 65px;
         left: 0;
         right: 0;
         z-index: 1030;

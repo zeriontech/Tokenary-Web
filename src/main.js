@@ -20,7 +20,7 @@ Vue.use(VueClipboard)
 Vue.use(VeeValidate)
 Vue.use(Notifications)
 Vue.use(VueOffline)
-Vue.use(VModal)
+Vue.use(VModal, { dynamic: true })
 Vue.use(moment)
 Vue.use(VueQrcodeReader)
 

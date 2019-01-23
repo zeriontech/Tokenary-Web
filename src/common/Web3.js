@@ -1,6 +1,7 @@
 import Web3 from 'web3'
 import BigNumber from 'bignumber.js'
-import abi from './json/erc20.abi'
+import abi20 from './json/erc20.abi'
+import abi721 from './json/erc721.abi'
 
 export const web3Instance = new Web3(
   new Web3.providers.HttpProvider(process.env.VUE_APP_TOKENARY_URL_PROVIDER)
@@ -46,10 +47,20 @@ export const padLeft = (n, width, z) => {
 export const removeHexPrefix = hex => hex.toLowerCase().replace('0x', '')
 
 export const getTransferTokenTransaction = transaction => {
-  const transferMethodHash = '0xa9059cbb'
+  let dataString
+  if (transaction.nftVersion === undefined) {
+    transaction.nftVersion = '1.0'
+  }
+
   const value = BigNumber(BigNumber(transaction.value).times(BigNumber(10).pow(transaction.decimals))).toString(16)
   const recipient = removeHexPrefix(transaction.to)
-  const dataString = getDataString(transferMethodHash, [recipient, value])
+  const from = removeHexPrefix(transaction.from)
+
+  if (transaction.nftVersion.toString() !== '1.0') {
+    dataString = getDataString('0x23b872dd', [from, recipient, value])
+  } else {
+    dataString = getDataString('0xa9059cbb', [recipient, value])
+  }
   return {
     from: transaction.from,
     to: transaction.contractAddress,
@@ -59,17 +70,23 @@ export const getTransferTokenTransaction = transaction => {
   }
 }
 
-export const estimateGasContract = (from, to, value, gas, contractAddress, gasLimit = false) => {
-  let contract = new web3Instance.eth.Contract(abi, contractAddress, { from: from })
+export const estimateGasContract = (from, to, value, gas, contractAddress, gasLimit = false, nftVersion = '1.0') => {
+  let contract = new web3Instance.eth.Contract(abi721, contractAddress, { from: from })
 
   return new Promise((resolve, reject) => {
     if (gasLimit) {
       resolve(gasLimit)
     }
 
-    contract.methods.transfer(to, value).estimateGas().then((estimateGas) => {
-      resolve(estimateGas)
-    }).catch(reject)
+    if (nftVersion.toString() === '1.0') {
+      contract.methods.transfer(to, value).estimateGas().then((estimateGas) => {
+        resolve(estimateGas)
+      }).catch(reject)
+    } else {
+      contract.methods.transferFrom(from, to, value).estimateGas().then((estimateGas) => {
+        resolve(estimateGas)
+      }).catch(reject)
+    }
   })
 }
 
@@ -131,7 +148,7 @@ export const web3SendSignedTransaction = signedTx =>
 export const getBalance = (address, contractAddress = '0x0000000000000000000000000000000000000000') => {
   return new Promise((resolve) => {
     if (contractAddress !== '0x0000000000000000000000000000000000000000') {
-      let contract = new window.web3.eth.Contract(abi, contractAddress)
+      let contract = new window.web3.eth.Contract(abi20, contractAddress)
       contract.methods.balanceOf(address).call().then((balance) => {
         contract.methods.decimals().call().then((decimals) => {
           resolve(balance / Math.pow(10, decimals))

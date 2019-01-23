@@ -84,10 +84,10 @@ const getters = {
     }
     return false
   },
-  getEstimateGas: state => (from, to, value, gasPrice, contractAddress, gasLimit, data) => {
+  getEstimateGas: state => (from, to, value, gasPrice, contractAddress, gasLimit, data, nftVersion = '1.0') => {
     return new Promise((resolve, reject) => {
       if (contractAddress !== '0x0000000000000000000000000000000000000000') {
-        estimateGasContract(from, to, value, gasPrice, contractAddress, gasLimit).then((fee) => {
+        estimateGasContract(from, to, value, gasPrice, contractAddress, gasLimit, nftVersion).then((fee) => {
           resolve(fee)
         }).catch(reject)
       } else {

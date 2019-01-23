@@ -36,6 +36,7 @@ function getTransactionApi (store, mutation, state, hash) {
         }
         store.dispatch('removeUnacceptedTransactionByHash', { hash: hash })
         store.dispatch('fetchTokens')
+        store.dispatch('fetchCollectibles')
         clearTimeout(timerId)
       } else {
         timerId = setTimeout(tick, 5000)

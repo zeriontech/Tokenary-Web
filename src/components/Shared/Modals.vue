@@ -1,5 +1,6 @@
 <template>
     <div>
+        <modals-container/>
         <send-transaction-form/>
         <receive-form/>
         <settings-form/>
